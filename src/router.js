@@ -4,8 +4,9 @@ import TopPage from '@/components/pages/TopPage'
 import Mypage from '@/components/pages/Mypage'
 import IdeaListPage from '@/components/pages/IdeaListPage'
 import IdeaDetailPage from '@/components/pages/IdeaDetailPage'
-import LoginPage from '@/components/pages/LoginPage'
 import IdeaInputPage from '@/components/pages/IdeaInputPage'
+import IdeaUpdatePage from '@/components/pages/IdeaUpdatePage'
+import LoginPage from '@/components/pages/LoginPage'
 import UserInputPage from '@/components/pages/UserInputPage'
 import UserUpdatePage from '@/components/pages/UserUpdatePage'
 
@@ -29,6 +30,16 @@ export default new Router({
       component: IdeaDetailPage
     },
     {
+      path: '/inputIdea',
+      name: 'IdeaInputPage',
+      component: IdeaInputPage
+    },
+    {
+      path: '/updateIdea/:ideaId',
+      name: 'IdeaUpdatePage',
+      component: IdeaUpdatePage
+    },
+    {
       path: '/mypage',
       name: 'Mypage',
       component: Mypage
@@ -37,11 +48,6 @@ export default new Router({
       path: '/login',
       name: 'LoginPage',
       component: LoginPage
-    },
-    {
-      path: '/inputIdea',
-      name: 'IdeaInputPage',
-      component: IdeaInputPage
     },
     {
       path: '/inputUser',

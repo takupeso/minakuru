@@ -1,8 +1,8 @@
 <template>
-  <div id="ideaInputPage" class="page">
+  <div id="ideaUpdatePage" class="page">
     <div class="container">
       <div class="contants">
-          <idea-form-org inputOrUpdate="input"></idea-form-org>
+          <idea-form-org inputOrUpdate="update"></idea-form-org>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 import IdeaFormOrg from '../organisms/idea/IdeaFormOrg'
 
 export default {
-  name: 'IdeaInputOrg',
+  name: 'IdeaUpdatePage',
   components: {
     'idea-form-org': IdeaFormOrg
   }

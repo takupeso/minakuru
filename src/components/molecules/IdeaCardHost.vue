@@ -11,7 +11,7 @@
           <p class="text">日時：{{ideaStartOnFormed}}〜{{ideaEndOnFormed}}</p>
         </div>
         <v-flex xs12 sm12 d-flex>
-          <v-btn color="success" large>変更</v-btn>
+          <router-link :to="createUpdateIdeaPagePath"><v-btn color="success" large>変更</v-btn></router-link>
           <v-btn color="error" @click="deleteIdea" large>削除</v-btn>
           <v-btn color="warning" large>トーク</v-btn>
         </v-flex>
@@ -42,6 +42,9 @@ export default {
   computed: {
     createDetailPagePath: function () {
       return '/ideaDetail/' + this.idea.ideaId
+    },
+    createUpdateIdeaPagePath: function () {
+      return '/updateIdea/' + this.idea.ideaId
     },
     ideaStartOnFormed: function () {
       return this.formShowDate(this.idea.ideaStartOn)

@@ -2,7 +2,7 @@
   <div id="userUpdatePage" class="page">
     <div class="container">
       <div class="contants">
-          <user-form-org inputOrUpdate='update'></user-form-org>
+        <user-form-org inputOrUpdate="update"></user-form-org>
       </div>
     </div>
   </div>

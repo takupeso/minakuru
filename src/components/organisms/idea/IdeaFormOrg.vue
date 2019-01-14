@@ -250,23 +250,34 @@ export default {
       menu: ''
     }
   },
+  props: {
+    inputOrUpdate: String
+  },
   methods: {
-    makeAxiosIdea () {
+    copyIdeaToAxiosFromForm () {
       Object.assign(this.axiosIdea, this.formIdea)
       this.axiosIdea.ideaStartOn = this.formMysqlDate(this.formIdea.ideaStartDay, this.formIdea.ideaStartTime)
       this.axiosIdea.ideaEndOn = this.formMysqlDate(this.formIdea.ideaEndDay, this.formIdea.ideaEndTime)
     },
-    handleAvatarSuccess: async function () {
+    savaIdea: async function () {
       await axios.post('http://localhost:8080/api/ideas/', this.axiosIdea)
-      this.$message({
-        showClose: true,
-        message: 'アイデア登録成功!',
-        type: 'success'
-      })
+      alert('アイデア登録成功');
+    },
+    updateIdea: async function () {
+      await axios.put('http://localhost:8080/api/ideas/' + this.$route.params.ideaId, this.axiosIdea)
+      alert('アイデア変更成功');
+
     },
     postIdea () {
-      this.makeAxiosIdea()
-      this.handleAvatarSuccess()
+      this.copyIdeaToAxiosFromForm()
+      console.log("postIdea")
+      console.log(this.inputOrUpdate)
+      if (this.inputOrUpdate == "input") {
+        this.savaIdea()
+      } else if (this.inputOrUpdate == "update") {
+        console.log("update")
+        this.updateIdea()
+      }
     }
   },
   computed: {
@@ -275,6 +286,15 @@ export default {
     },
     allCategory: function () {
       return this.getCategoryList()
+    }
+  },
+  created() {
+    if (this.inputOrUpdate == "update") {
+      axios
+        .get('http://localhost:8080/api/ideas/' + this.$route.params.ideaId)
+        .then(response => (this.formIdea = response.data))
+      console.log(this.formIdea)
+      console.log('http://localhost:8080/api/ideas/' + this.$route.params.ideaId)
     }
   }
 }

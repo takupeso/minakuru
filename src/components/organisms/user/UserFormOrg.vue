@@ -22,8 +22,8 @@
               label="性別"
               row
             >
-              <v-radio label="男" value='1'></v-radio>
-              <v-radio label="女" value='2'></v-radio>
+              <v-radio label="男" value=1></v-radio>
+              <v-radio label="女" value=2></v-radio>
             </v-radio-group>
           </v-flex>
           <v-flex xs12 sm12 d-flex>
@@ -514,7 +514,7 @@ export default {
       axiosUser: {
         name: '',
         picture: '',
-        age: '',
+        age: 20,
         sex: '1',
         hobby: '',
         interest: '',
@@ -577,9 +577,12 @@ export default {
     },
     savaUser: async function () {
       await axios.post('http://localhost:8080/api/users', this.axiosUser)
+      alert('ユーザー登録成功');
+
     },
     updateUser: async function ()  {
-      await axios.update('http://localhost:8080/api/users', this.axiosUser)
+      await axios.put('http://localhost:8080/api/users/' + this.$route.params.userId, this.axiosUser)
+      alert('ユーザー変更成功');
     },
     postUser () {
       this.copyUserToAxiosFromForm()
@@ -606,15 +609,11 @@ export default {
       return this.getPrefecturesList()
     }
   },
-  mouted: {
-    getUser () {
-      console.log(this.inputOrUpdate)
-      if (this.inputOrUpdate == 'update') {
-        axios
-          .get('http://localhost:8080/api/users/' + this.$route.params.ideaId)
-          .then(response => (this.formUser = response.data))
-        console.log(this.formUser)
-      }
+  created() {
+    if (this.inputOrUpdate == 'update') {
+      axios
+        .get('http://localhost:8080/api/users/' + this.$route.params.userId)
+        .then(response => (this.formUser = response.data))
     }
   }
 }
