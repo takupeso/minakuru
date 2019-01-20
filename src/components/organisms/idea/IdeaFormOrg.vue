@@ -293,8 +293,6 @@ export default {
       axios
         .get('http://localhost:8080/api/ideas/' + this.$route.params.ideaId)
         .then(response => (this.formIdea = response.data))
-      console.log(this.formIdea)
-      console.log('http://localhost:8080/api/ideas/' + this.$route.params.ideaId)
     }
   }
 }

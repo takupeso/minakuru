@@ -6,6 +6,13 @@
         <h1 class="u-text-cw">「やった!」に</h1>
       </div>
     </div>
+    <v-layout row justify-center>
+      <v-flex xs10>
+        <router-link :to="recommendIdea">
+          <v-btn block color="success" large>あなたにおすすめのアイデア</v-btn>
+        </router-link>
+      </v-flex>
+    </v-layout>
     <div class="container">
         <div class="contants">
           <idea-card-new-org class="u-mb50"></idea-card-new-org>
@@ -30,6 +37,11 @@ export default {
   data () {
     return {
       img: 'https://fujifilm.jp/personal/digitalcamera/x/fujinon_lens_xf16mmf14_r_wr/sample_images/img/index/ff_xf16mmf14_r_wr_004.JPG'
+    }
+  },
+  computed: {
+    recommendIdea () {
+      return '/ideaDetail/' + (Math.floor( Math.random() * 11 ) + 1)
     }
   },
   components: {
