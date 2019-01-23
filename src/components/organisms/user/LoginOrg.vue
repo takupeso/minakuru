@@ -39,10 +39,9 @@ export default {
       formUser: [
         {}
       ],
-      axiosUserLoginInfo: {
-        email:"exec@gmail.com",
-        password:"password",
-      },
+      axiosUserLoginInfo: [
+        {}
+      ],
       state:''
     }
   },
@@ -56,58 +55,9 @@ export default {
   },
   methods: {
     login() {
-      const promise = this.postLogin();
-
-      promise
-        .then(function(response) {
-          console.log('処理前' + response);
-          if(response == 200) {
-            console.log('処理中' + response);
-            axios
-              .get('http://localhost:8080/api/users/20')
-              // .then(response => (userInfo = response.data))
-              .then(response => (this.$store.commit('user/updateUser', { user: response.data })))
-          }
-          console.log('処理後' + response);
-        }).catch(function(value) {
-          // 非同期処理が失敗した場合
-          console.log(value);
-});
-    },
-    postLogin() {
-      let LoginInfo = this.axiosUserLoginInfo;
-      let state = '';
-      return new Promise(function(resolve) {
-        // 非同期で行いたい処理
-        const CSRF_TOKEN = document.getElementsByName('csrfToken')[0]
-        axios.defaults.headers.common['X-XSRF-TOKEN'] = CSRF_TOKEN
-
-        axios
-          .post('http://localhost:8080/api/login', LoginInfo)
-          .then(response => (state = response.date));
-        // console.log('処理前' + state);
-        // if(state === 200) {
-        //   console.log('処理中' + state);
-        //   resolve();
-        // }
-        // console.log('処理後' + state);
-
-        setTimeout(function() {
-          console.log('非同期処理' + state);
-          resolve(state);
-        }, 10000);
-
-      }).then(function(response) {
-        console.log('処理前' + response);
-        if(response == 200) {
-          console.log('処理中' + response);
-          axios
-            .get('http://localhost:8080/api/users/20')
-            // .then(response => (userInfo = response.data))
-            .then(response => (this.$store.commit('user/updateUser', { user: response.data })))
-        }
-        console.log('処理後' + response);
-      })
+      axios
+        .get('http://localhost:8080/api/login/1')
+        .then(response => (this.axiosUserLoginInfo = response.data))
     }
   }
 }
