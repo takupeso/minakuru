@@ -2,6 +2,7 @@
   <div id="topHeader" class="top_header">
     <router-link  to="/" tag="img" :src="img" class="img u-ml30"></router-link>
     <top-header-buttons class="top_header_buttons u-mla u-mr50"></top-header-buttons>
+    <div>{{getUserInfo}}</div>
   </div>
 </template>
 
@@ -13,6 +14,11 @@ export default {
   data () {
     return {
       img: require('../../assets/logo.png')
+    }
+  },
+  computed: {
+    getUserInfo () {
+      return this.$store.state.userInfo.userInfo
     }
   },
   components: {

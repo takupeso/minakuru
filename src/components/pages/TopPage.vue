@@ -36,12 +36,18 @@ export default {
   name: 'TopPage',
   data () {
     return {
-      img: 'https://fujifilm.jp/personal/digitalcamera/x/fujinon_lens_xf16mmf14_r_wr/sample_images/img/index/ff_xf16mmf14_r_wr_004.JPG'
+      img: 'https://fujifilm.jp/personal/digitalcamera/x/fujinon_lens_xf16mmf14_r_wr/sample_images/img/index/ff_xf16mmf14_r_wr_004.JPG',
+      user:[]
     }
   },
   computed: {
     recommendIdea () {
       return '/ideaDetail/' + (Math.floor( Math.random() * 11 ) + 1)
+    }
+  },
+  methods: {
+    getUserInfo() {
+      this.user = this.$store.state.user;
     }
   },
   components: {

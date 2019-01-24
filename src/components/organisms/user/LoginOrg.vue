@@ -18,9 +18,11 @@
                             <v-text-field type="hidden" v-model="formUser.csrf"></v-text-field>
                             <v-layout row wrap justify-end>
                                 <v-btn color="success" @click="login">ログイン</v-btn>
+                                <v-btn color="success" @click="getUserInfo">ログイン</v-btn>
                             </v-layout>
                         </v-form>
                     </v-container>
+                    {{getUserInfo}}
                 </v-card>
             </v-flex>
         </v-layout>
@@ -30,7 +32,6 @@
 
 <script>
 import axios from 'axios'
-import { mapState } from 'vuex';
 
 export default {
   name: 'LoginOrg',
@@ -40,24 +41,30 @@ export default {
         {}
       ],
       axiosUserLoginInfo: [
+        {
+          userId: "",
+          email: "",
+          name: "",
+          password: ""
+        }
+      ],
+      userInfo:[
         {}
       ],
       state:''
     }
   },
   computed: {
-    message () {
-      return this.name;
-    },
-    ...mapState({
-      user: 'user'
-    })
+    getUserInfo () {
+      return this.$store.state.userInfo
+    }
   },
   methods: {
     login() {
       axios
         .get('http://localhost:8080/api/login/1')
         .then(response => (this.axiosUserLoginInfo = response.data))
+    this.$store.commit('userInfo/updateUserInfo', this.axiosUserLoginInfo)
     }
   }
 }
